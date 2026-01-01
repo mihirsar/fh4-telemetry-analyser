@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  influxdb:
+    image: influxdb:2.8
+    container_name: fh4-influxdb
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: admin123
+      DOCKER_INFLUXDB_INIT_ORG: fh4-test
+      DOCKER_INFLUXDB_INIT_BUCKET: fh4-telemetry
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: fh4-super-token
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: fh4-grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - influxdb
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+  telemetry:
+    build: .
+    container_name: fh4-telemetry
+    depends_on:
+      - influxdb
+    environment:
+      INFLUX_URL: http://localhost:8086
+      INFLUX_TOKEN: fh4-super-token
+      INFLUX_ORG: fh4-test
+      INFLUX_BUCKET: fh4-telemetry
+    network_mode: host   # REQUIRED for UDP FH4 telemetry
+
+volumes:
+  influxdb-data:
+  grafana-data:
