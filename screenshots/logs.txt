@@ -1,0 +1,4 @@
+CONTAINER ID   IMAGE                     COMMAND                  CREATED       STATUS             PORTS                                         NAMES
+02d4182a48e1   fh4_telemetry-telemetry   "python3 fh4_influx.…"   2 hours ago   Up About an hour                                                 fh4-telemetry
+ca789e936a10   grafana/grafana:latest    "/run.sh"                2 hours ago   Up About an hour                                                 fh4-grafana
+891fd4fc2622   influxdb:2.8        
