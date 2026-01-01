@@ -10,6 +10,9 @@ Realtime telemetry analysis for Forza Horizon 4 using Python, Docker, and ML.
 ## Grafana Dashboard
 ![Telemetry Dashboard](screenshots/grafana_dash.jpeg)
 
+## FH4 Settings
+![Telemetry Dashboard](screenshots/fh4-settings.png)
+
 ## Setup
 1. Clone the repo
 2. Install requirements
